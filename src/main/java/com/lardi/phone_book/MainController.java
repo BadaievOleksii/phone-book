@@ -13,7 +13,7 @@ public class MainController {
 
     protected static final Logger LOG = LogManager.getLogger(MainController.class);
 
-    @RequestMapping("/")
+    @RequestMapping("/hell")
     public String index(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
 
 

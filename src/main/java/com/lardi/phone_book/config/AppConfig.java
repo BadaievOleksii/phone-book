@@ -1,8 +1,5 @@
 package com.lardi.phone_book.config;
 
-/**
- * Created by ALEX on 24.10.2016.
- */
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,13 +23,13 @@ public class AppConfig {
     @Autowired
     Environment env;
 
-    @Value("${lardi.test}")
-    private String teststr;
+    @Value("${lardi.dbType}")
+    private String dbType;
 
     @Bean
-    public String testConfig(){
-        LOG.debug(teststr);
-        return teststr;
+    public String configureDatabase(){
+
+        return "";
     }
 
 
