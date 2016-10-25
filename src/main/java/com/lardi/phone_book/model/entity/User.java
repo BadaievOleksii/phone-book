@@ -1,8 +1,6 @@
 package com.lardi.phone_book.model.entity;
 
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 
 @Entity
@@ -19,6 +17,17 @@ public class User {
     private String password;
     @Column(name="fio")
     private String fio;
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", fio='" + fio + '\'' +
+                '}';
+    }
 
     public String getFio() {
         return fio;

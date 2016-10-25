@@ -29,33 +29,13 @@ public class AppConfig {
 
     @Value("${lardi.dbType}")
     private String dbType;
-/*
-    @Value("${lardi.mysqlUrl}")
-    private String mysqlUrl;
-    @Value("${lardi.mysqlUser}")
-    private String mysqlUser;
-    @Value("${lardi.mysqlPassword}")
-    private String mysqlPassword;
-*/
-    //@Value("${lardi.jsonFilePath}")
-    //private String jsonFilePath;
 
+    private static String mysqlUrl;
+    private static String mysqlUser;
+    private static String mysqlPassword;
 
+    private static String jsonUsersFile;
 
-    //@Bean(name = "dataSource")
-    //public DataSource configureDatabase(){
-
-/*
-        HikariConfig config = new HikariConfig();
-        config.setDriverClassName(driver);
-        config.setJdbcUrl(url);
-        config.setUsername(username);
-        config.setPassword(password);
-
-        return new HikariDataSource(config);
-*/
-    //    return null;
-    //}
 
 
     @Bean(name = "repositoryFactory")
@@ -63,12 +43,16 @@ public class AppConfig {
         switch (dbType) {
             case "mysql":
                 LOG.debug("MySQL db type");
-                HibernateUtil.setDbUrl(env.getRequiredProperty("lardi.mysqlUrl"));
-                HibernateUtil.setDbUser(env.getRequiredProperty("lardi.mysqlUser"));
-                HibernateUtil.setDbPassword(env.getRequiredProperty("lardi.mysqlPassword"));
+                mysqlUrl = env.getRequiredProperty("lardi.mysql.url");
+                mysqlUser = env.getRequiredProperty("lardi.mysql.user");
+                mysqlPassword = env.getRequiredProperty("lardi.mysql.password");
+
                 return new MysqlRepositoryFactory();
             case "json":
                 LOG.debug("JSON db type");
+
+                //JsonConfig.setFilesPath(env.getRequiredProperty("lardi.jsonFilesPath"));
+                jsonUsersFile = env.getRequiredProperty("lardi.json.usersFile");
 
                 return new JsonRepositoryFactory();
             default:
@@ -85,5 +69,21 @@ public class AppConfig {
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    public static String getMysqlUrl() {
+        return mysqlUrl;
+    }
+
+    public static String getMysqlUser() {
+        return mysqlUser;
+    }
+
+    public static String getMysqlPassword() {
+        return mysqlPassword;
+    }
+
+    public static String getJsonUsersFile() {
+        return jsonUsersFile;
     }
 }

@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
-import javax.sql.DataSource;
 import java.util.List;
 
 @Configuration
@@ -22,9 +21,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     protected static final Logger LOG = LogManager.getLogger(WebSecurityConfig.class);
 
-
-    //@Autowired
-    //DataSource dataSource;
 
     @Autowired
     @Qualifier("userService")
@@ -47,12 +43,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        //LOG.debug(bean.hello);
-        //UserService s = userServiceFactory.getUserService();
+
 
         List<User> a = userService.getAll();
         for(User b : a){
-            LOG.debug(b.getUsername());
+            LOG.debug(b);
         }
 
         auth

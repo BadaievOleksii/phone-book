@@ -11,9 +11,7 @@ import org.hibernate.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by ALEX on 25.10.2016.
- */
+
 public class MysqlUserRepository implements UserRepository {
 
     protected static final Logger LOG = LogManager.getLogger(MysqlUserRepository.class);
@@ -36,8 +34,7 @@ public class MysqlUserRepository implements UserRepository {
                 list.add((User) entry);
             }
             tx.commit();
-            LOG.debug(this.getClass().getSimpleName()
-                    + ": retrieved list of entities (" + list.size() + ") from DB");
+            LOG.debug("Retrieved list of entities (" + list.size() + ") from MySQL db");
         } catch (Exception e) {
             LOG.error("Could not get list of entities", e);
         } finally {
