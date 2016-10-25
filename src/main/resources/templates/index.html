@@ -6,6 +6,15 @@
 </head>
 <body>
 <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+
+<div th:inline="text">
+    <p> Actions:</p>
+    <p> <a href="/viewdata">View your data</a></p>
+    <p> <a href="@{/logout}">Logout</a></p>
+</div>
+
+
+
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
 </form>

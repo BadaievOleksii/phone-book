@@ -1,5 +1,7 @@
 package com.lardi.phone_book;
 
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.apache.logging.log4j.LogManager;
@@ -15,6 +17,7 @@ public class Application {
 
 
         SpringApplication.run(Application.class, args);
+
     }
 
 }
