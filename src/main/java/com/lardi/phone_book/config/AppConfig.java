@@ -1,10 +1,10 @@
 package com.lardi.phone_book.config;
 
 
-import com.lardi.phone_book.model.persistence.HibernateUtil;
-import com.lardi.phone_book.model.repository.RepositoryFactory;
-import com.lardi.phone_book.model.repository.json.JsonRepositoryFactory;
-import com.lardi.phone_book.model.repository.mysql.MysqlRepositoryFactory;
+import com.lardi.phone_book.model.dao.DaoFactory;
+import com.lardi.phone_book.model.dao.UserDao;
+import com.lardi.phone_book.model.dao.json.JsonDaoFactory;
+import com.lardi.phone_book.model.dao.mysql.MysqlDaoFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +38,8 @@ public class AppConfig {
 
 
 
-    @Bean(name = "repositoryFactory")
-    public RepositoryFactory configureRepositoryFactory(){
+    @Bean(name = "daoFactory")
+    public DaoFactory configureDaoFactory(){
         switch (dbType) {
             case "mysql":
                 LOG.debug("MySQL db type");
@@ -47,14 +47,14 @@ public class AppConfig {
                 mysqlUser = env.getRequiredProperty("lardi.mysql.user");
                 mysqlPassword = env.getRequiredProperty("lardi.mysql.password");
 
-                return new MysqlRepositoryFactory();
+                return new MysqlDaoFactory();
             case "json":
                 LOG.debug("JSON db type");
 
                 //JsonConfig.setFilesPath(env.getRequiredProperty("lardi.jsonFilesPath"));
                 jsonUsersFile = env.getRequiredProperty("lardi.json.usersFile");
 
-                return new JsonRepositoryFactory();
+                return new JsonDaoFactory();
             default:
                 LOG.error("Specified DB type is not supported");
 
@@ -63,6 +63,10 @@ public class AppConfig {
         return null;
     }
 
+    @Bean(name = "userDao")
+    public UserDao configureUserDao() {
+        return configureDaoFactory().getUserDao();
+    }
 
 
 

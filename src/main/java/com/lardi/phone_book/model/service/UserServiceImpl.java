@@ -2,8 +2,8 @@ package com.lardi.phone_book.model.service;
 
 
 import com.lardi.phone_book.model.entity.User;
-import com.lardi.phone_book.model.repository.RepositoryFactory;
-import com.lardi.phone_book.model.repository.UserRepository;
+import com.lardi.phone_book.model.dao.DaoFactory;
+import com.lardi.phone_book.model.dao.UserDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,25 +18,24 @@ public class UserServiceImpl implements UserService {
     protected static final Logger LOG = LogManager.getLogger(UserServiceImpl.class);
 
 
+    //@Autowired
+    //DaoFactory daoFactory;
     @Autowired
-    RepositoryFactory repositoryFactory;
+    UserDao userDao;
 
-    UserRepository repository;
+    private UserDao getUserDao(){
+        //if(userDao == null){
+        //    userDao = daoFactory.getUserDao();
+        //}
+        return userDao;
+    }
 
-    public UserServiceImpl(){
-
+    public void add(User newUser){
+        getUserDao().add(newUser);
     }
 
 
-
-    private UserRepository getUserRepository(){
-        if(repository == null){
-            repository = repositoryFactory.getUserRepository();
-        }
-        return repository;
-    }
-
-    public List<User> getAll(){
-        return getUserRepository().getAll();
+    public List<User> getList(){
+        return getUserDao().getList();
     }
 }

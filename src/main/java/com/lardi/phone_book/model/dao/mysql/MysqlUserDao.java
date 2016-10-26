@@ -1,8 +1,9 @@
-package com.lardi.phone_book.model.repository.mysql;
+package com.lardi.phone_book.model.dao.mysql;
 
+import com.lardi.phone_book.model.dao.GenericDao;
 import com.lardi.phone_book.model.entity.User;
 import com.lardi.phone_book.model.persistence.HibernateUtil;
-import com.lardi.phone_book.model.repository.UserRepository;
+import com.lardi.phone_book.model.dao.UserDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -12,12 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MysqlUserRepository implements UserRepository {
+public class MysqlUserDao extends MysqlBaseDao<User> implements UserDao{
 
-    protected static final Logger LOG = LogManager.getLogger(MysqlUserRepository.class);
+    protected static final Logger LOG = LogManager.getLogger(MysqlUserDao.class);
 
+    private static final String LIST_ALL = "FROM User";
 
-    public List<User> getAll(){
+    public void add(User newUser){
+        addEntity(newUser);
+    }
+
+    public List<User> getList(){
+        /*
         LOG.debug("Getting all");
 
 
@@ -41,5 +48,7 @@ public class MysqlUserRepository implements UserRepository {
             session.close();
         }
         return list;
+        */
+        return getEntityList(LIST_ALL);
     }
 }

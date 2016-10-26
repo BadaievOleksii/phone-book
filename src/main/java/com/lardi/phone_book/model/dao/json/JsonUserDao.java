@@ -1,29 +1,35 @@
-package com.lardi.phone_book.model.repository.json;
+package com.lardi.phone_book.model.dao.json;
 
 import com.google.gson.Gson;
 import com.lardi.phone_book.config.AppConfig;
 import com.lardi.phone_book.model.entity.User;
-import com.lardi.phone_book.model.repository.UserRepository;
-import org.apache.commons.io.FileUtils;
+import com.lardi.phone_book.model.dao.UserDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.*;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 
-public class JsonUserRepository implements UserRepository {
+public class JsonUserDao extends JsonBaseDao<User> implements UserDao {
 
-    protected static final Logger LOG = LogManager.getLogger(JsonUserRepository.class);
+    protected static final Logger LOG = LogManager.getLogger(JsonUserDao.class);
 
-    private Gson gson = new Gson();
+    public JsonUserDao(){
+        fileName = AppConfig.getJsonUsersFile();
+    }
 
-    public List<User> getAll() {
+
+    //TODO: proper user_id for new lines
+    @Override
+    public void add(User newUser){
+        addEntity(newUser);
+    }
+
+    @Override
+    public List<User> getList() {
 
 
-
+/*
         User u = new User();
         u.setFio("12345");
         u.setPassword("asafsg");
@@ -31,14 +37,14 @@ public class JsonUserRepository implements UserRepository {
         u.setUserId(1);
 
         File f = new File(AppConfig.getJsonUsersFile());
-/*
+
         String json = gson.toJson(u);
         try {
             FileUtils.writeStringToFile(f, json, true);
         } catch (IOException e) {
             e.printStackTrace();
         }
-*/
+
 
         List<User> users = new ArrayList<>();
         try {
@@ -51,8 +57,8 @@ public class JsonUserRepository implements UserRepository {
             LOG.error("Could not read entities from JSON file", e);
         }
 
-
-        return users;
+*/
+        return getEntitiesList();
 
 
 

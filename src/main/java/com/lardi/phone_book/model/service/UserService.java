@@ -5,5 +5,6 @@ import com.lardi.phone_book.model.entity.User;
 import java.util.List;
 
 public interface UserService {
-    public List<User> getAll();
+    public void add(User newUser);
+    public List<User> getList();
 }
