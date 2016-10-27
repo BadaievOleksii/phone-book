@@ -1,15 +1,10 @@
 package com.lardi.phone_book.model.dao.mysql;
 
-import com.lardi.phone_book.model.dao.GenericDao;
 import com.lardi.phone_book.model.entity.User;
-import com.lardi.phone_book.model.persistence.HibernateUtil;
 import com.lardi.phone_book.model.dao.UserDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,6 +13,7 @@ public class MysqlUserDao extends MysqlBaseDao<User> implements UserDao{
     protected static final Logger LOG = LogManager.getLogger(MysqlUserDao.class);
 
     private static final String LIST_ALL = "FROM User";
+    private static final String FIND_BY_USERNAME = "FROM User WHERE username=";
 
     public void add(User newUser){
         addEntity(newUser);
@@ -49,6 +45,16 @@ public class MysqlUserDao extends MysqlBaseDao<User> implements UserDao{
         }
         return list;
         */
-        return getEntityList(LIST_ALL);
+        return getEntitiesList(LIST_ALL);
+    }
+
+
+    public User findByUsername(String username){
+        List<User> users = getEntitiesList(FIND_BY_USERNAME + "'" + username + "'");
+        if(users.isEmpty()){
+            return null;
+        } else {
+            return users.get(0);
+        }
     }
 }

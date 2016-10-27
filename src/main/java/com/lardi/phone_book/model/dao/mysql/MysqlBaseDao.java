@@ -35,7 +35,7 @@ public abstract class MysqlBaseDao<T extends BaseEntity> extends BaseDao<T> impl
 
     }
 
-    protected List<T> getEntityList(String query){
+    protected List<T> getEntitiesList(String query){
         Transaction tx = null;
 
         List<T> list = new ArrayList<T>();

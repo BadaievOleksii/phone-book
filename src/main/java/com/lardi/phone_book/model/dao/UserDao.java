@@ -6,5 +6,5 @@ import java.util.List;
 
 
 public interface UserDao extends GenericDao<User> {
-
+    public User findByUsername(String username);
 }

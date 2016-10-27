@@ -15,6 +15,10 @@ public class User extends BaseEntity {
     private String username;
     @Column(name="password")
     private String password;
+
+    @Transient
+    private String passwordConfirm;
+
     @Column(name="fio")
     private String fio;
 
@@ -59,5 +63,13 @@ public class User extends BaseEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
     }
 }
