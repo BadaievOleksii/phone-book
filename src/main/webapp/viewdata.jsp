@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Home page</title>
+    <title>Phone book records</title>
 
     <link href="${contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
@@ -22,15 +22,14 @@
 <body>
 <div class="container">
 
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="POST" action="${contextPath}/logout">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
+    <c:if test="${not empty records}">
 
-        <h2>Welcome ${pageContext.request.userPrincipal.name}</h2>
+        <ul>
+            <c:forEach var="record" items="${records}">
+                <li>${record}</li>
+            </c:forEach>
+        </ul>
 
-        <h4><a onclick="document.forms['logoutForm'].submit()">Logout</a></h4>
-        <h4><a href="${contextPath}/viewdata">View your phone book</a></h4>
     </c:if>
 
 </div>

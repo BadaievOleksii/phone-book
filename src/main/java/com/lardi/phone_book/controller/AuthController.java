@@ -54,8 +54,6 @@ public class AuthController {
             return "register";
         }
 
-        //TODO: i18n, resource bundles etc
-
         LOG.debug("Registering user: " + userForm);
         userService.add(userForm);
 

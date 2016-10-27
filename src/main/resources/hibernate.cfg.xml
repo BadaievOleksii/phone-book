@@ -16,5 +16,6 @@
         <property name="hibernate.hikari.dataSource.password">admin</property>
         -->
         <mapping class="com.lardi.phone_book.model.entity.User"/>
+        <mapping class="com.lardi.phone_book.model.entity.Record"/>
     </session-factory>
 </hibernate-configuration>

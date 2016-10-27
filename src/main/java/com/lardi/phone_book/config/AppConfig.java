@@ -2,6 +2,7 @@ package com.lardi.phone_book.config;
 
 
 import com.lardi.phone_book.model.dao.DaoFactory;
+import com.lardi.phone_book.model.dao.RecordDao;
 import com.lardi.phone_book.model.dao.UserDao;
 import com.lardi.phone_book.model.dao.json.JsonDaoFactory;
 import com.lardi.phone_book.model.dao.mysql.MysqlDaoFactory;
@@ -38,6 +39,7 @@ public class AppConfig {
     private static String mysqlPassword;
 
     private static String jsonUsersFile;
+    private static String jsonRecordsFile;
 
 
 
@@ -56,6 +58,7 @@ public class AppConfig {
 
                 //JsonConfig.setFilesPath(env.getRequiredProperty("lardi.jsonFilesPath"));
                 jsonUsersFile = env.getRequiredProperty("lardi.json.usersFile");
+                jsonRecordsFile = env.getRequiredProperty("lardi.json.recordsFile");
 
 
                 return new JsonDaoFactory();
@@ -69,15 +72,29 @@ public class AppConfig {
 
     @Bean(name = "userDao")
     public UserDao configureUserDao() {
-        File file = new File(env.getRequiredProperty("lardi.json.usersFile"));
-        try {
-            file.createNewFile();
-        } catch (IOException ignored) {
+        if(dbType.equals("json")){
+            File file = new File(env.getRequiredProperty("lardi.json.usersFile"));
+            try {
+                file.createNewFile();
+            } catch (IOException ignored) {
+            }
         }
+
         return configureDaoFactory().getUserDao();
     }
 
+    @Bean(name = "recordDao")
+    public RecordDao configureRecordDao() {
+        if(dbType.equals("json")){
+            File file = new File(env.getRequiredProperty("lardi.json.recordsFile"));
+            try {
+                file.createNewFile();
+            } catch (IOException ignored) {
+            }
+        }
 
+        return configureDaoFactory().getRecordDao();
+    }
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
@@ -98,5 +115,9 @@ public class AppConfig {
 
     public static String getJsonUsersFile() {
         return jsonUsersFile;
+    }
+
+    public static String getJsonRecordsFile() {
+        return jsonRecordsFile;
     }
 }
