@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Create an account</title>
+    <title>Home page</title>
 
     <link href="${contextPath}/css/bootstrap.min.css" rel="stylesheet">
 

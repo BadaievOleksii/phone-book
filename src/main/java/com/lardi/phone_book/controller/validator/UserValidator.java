@@ -37,7 +37,7 @@ public class UserValidator implements Validator {
 
 
 
-        if (user.getUsername().length() < 3) {
+        if (user.getUsername().length() < 3 || user.getUsername().length() > 32) {
             errors.rejectValue("username", "Size.userForm.username");
         }
         if (userDao.findByUsername(user.getUsername()) != null) {
@@ -49,7 +49,7 @@ public class UserValidator implements Validator {
 
 
 
-        if (user.getPassword().length() < 5) {
+        if (user.getPassword().length() < 5 || user.getPassword().length() > 32) {
             errors.rejectValue("password", "Size.userForm.password");
         }
         if (!checkWithRegExp(user.getPassword(), PASSWORD_REGEX)) {
@@ -64,7 +64,7 @@ public class UserValidator implements Validator {
 
 
 
-        if (user.getFio().length() < 5) {
+        if (user.getFio().length() < 5 || user.getFio().length() > 32) {
             errors.rejectValue("fio", "Size.userForm.fio");
         }
         if (!checkWithRegExp(user.getFio(), FIO_REGEX)) {

@@ -15,6 +15,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 
+import java.io.File;
+import java.io.IOException;
+
 @Configuration
 @PropertySource("classpath:${lardi.conf}")
 
@@ -54,6 +57,7 @@ public class AppConfig {
                 //JsonConfig.setFilesPath(env.getRequiredProperty("lardi.jsonFilesPath"));
                 jsonUsersFile = env.getRequiredProperty("lardi.json.usersFile");
 
+
                 return new JsonDaoFactory();
             default:
                 LOG.error("Specified DB type is not supported");
@@ -65,6 +69,11 @@ public class AppConfig {
 
     @Bean(name = "userDao")
     public UserDao configureUserDao() {
+        File file = new File(env.getRequiredProperty("lardi.json.usersFile"));
+        try {
+            file.createNewFile();
+        } catch (IOException ignored) {
+        }
         return configureDaoFactory().getUserDao();
     }
 
