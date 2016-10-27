@@ -7,6 +7,7 @@ import com.lardi.phone_book.model.dao.UserDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,19 +24,17 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
 
-    private UserDao getUserDao(){
-        //if(userDao == null){
-        //    userDao = daoFactory.getUserDao();
-        //}
-        return userDao;
-    }
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     public void add(User newUser){
-        getUserDao().add(newUser);
+        newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
+        userDao.add(newUser);
     }
 
 
     public List<User> getList(){
-        return getUserDao().getList();
+        return userDao.getList();
     }
 }

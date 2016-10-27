@@ -7,12 +7,24 @@ import com.lardi.phone_book.model.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 public class AuthController {
@@ -24,6 +36,8 @@ public class AuthController {
 
     @Autowired
     private UserValidator userValidator;
+
+
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register(Model model) {
@@ -40,14 +54,28 @@ public class AuthController {
             return "register";
         }
 
-        //TODO: разобраться с интернационализацией, ресурс бандлами итд
+        //TODO: i18n, resource bundles etc
 
         LOG.debug("Registering user: " + userForm);
         userService.add(userForm);
-        //TODO: add user to auth list
 
 
-        return "redirect:/index";
+//Autologin
+/*
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        UserDetails user = new org.springframework.security.core.userdetails.User(
+                userForm.getUsername(),
+                userForm.getPassword(),
+                authorities);
+
+        Authentication authentication = new UsernamePasswordAuthenticationToken(user, userForm.getPassword(), authorities);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+*/
+
+
+
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

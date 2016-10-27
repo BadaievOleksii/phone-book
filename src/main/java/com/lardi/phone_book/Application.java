@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Locale;
+
 @SpringBootApplication
 public class Application {
 
@@ -15,6 +17,8 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
 
+        Locale.setDefault(Locale.ENGLISH);
+        //LOG.debug(Locale.getDefault().toString());
 
         SpringApplication.run(Application.class, args);
 
