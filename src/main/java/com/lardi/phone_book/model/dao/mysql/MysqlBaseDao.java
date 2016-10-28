@@ -35,6 +35,18 @@ public abstract class MysqlBaseDao<T extends BaseEntity> extends BaseDao<T> impl
 
     }
 
+    protected void deleteEntity(T entity){
+        Transaction tx = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
+            session.delete(entity);
+            tx.commit();
+            LOG.debug("Deleted " + entity.toString() + " from MySQL db");
+        } catch (Exception e) {
+            LOG.error("Could not DELETE entity from MySQL db", e);
+        }
+    }
+
     protected List<T> getEntitiesList(String query){
         Transaction tx = null;
 

@@ -64,7 +64,7 @@ public class JsonUserDao extends JsonBaseDao<User> implements UserDao {
 
     }
 
-    public User findByUsername(String username){
+    public User getByUsername(String username){
         List<User> users = getEntitiesList();
         for(User user : users){
             if(user.getUsername().equals(username)){

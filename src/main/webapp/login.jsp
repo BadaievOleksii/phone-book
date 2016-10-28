@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sign in</title>
 
-    <link href="${contextPath}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${contextPath}/resources/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -43,31 +43,33 @@
 -->
 
 <div class="container">
+    <div class="col-md-offset-4 col-md-4">
+        <form method="POST" action="${contextPath}/login" class="form-signin">
+            <h2 class="form-heading">Log in</h2>
 
-    <form method="POST" action="${contextPath}/login" class="form-signin">
-        <h2 class="form-heading">Log in</h2>
-
-        <div class="form-group ${error != null ? 'has-error' : ''}">
-            <span>${message}</span>
-            <span>${error}</span>
+            <div class="form-group ${error != null ? 'has-error' : ''}">
+                <span>${message}</span>
+                <span>${error}</span>
 
 
-            <label for="usernameInput" class="sr-only">Username:</label>
-            <input name="username" id="usernameInput" type="text" class="form-control" required autofocus="true"/>
-            <label for="passwordInput" class="sr-only">Password:</label>
-            <input name="password" id="passwordInput" type="password" class="form-control" required/>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <input name="username" id="usernameInput" type="text" class="form-control"
+                       placeholder="Username" required autofocus="true"/>
+                </br>
+                <input name="password" id="passwordInput" type="password" class="form-control"
+                       placeholder="Password" required/>
+                </br>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-            <h4 class="text-center"><a href="${contextPath}/register">Create an account</a></h4>
-        </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+                <h4 class="text-center"><a href="${contextPath}/register">Create an account</a></h4>
+            </div>
 
-    </form>
-
+        </form>
+    </div>
 </div>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="${contextPath}/js/bootstrap.min.js"></script>
+<script src="${contextPath}/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
  </body>
  </html>

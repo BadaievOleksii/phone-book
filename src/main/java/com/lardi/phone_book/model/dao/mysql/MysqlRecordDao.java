@@ -16,12 +16,27 @@ public class MysqlRecordDao extends MysqlBaseDao<Record> implements RecordDao {
 
     private static final String LIST_ALL = "FROM Record";
     private static final String GET_BY_OWNER_ID = "FROM Record WHERE ownerId=";
+    private static final String GET_BY_RECORD_ID = "FROM Record WHERE recordId=";
+
+
+    public void delete(Record record){
+        deleteEntity(record);
+    }
+
 
     public List<Record> getList(){
         return getEntitiesList(LIST_ALL);
     }
 
     public List<Record> getByOwnerId(int ownerId){
-        return getEntitiesList(GET_BY_OWNER_ID+"'"+ownerId+"'");
+        return getEntitiesList(GET_BY_OWNER_ID + "'" + ownerId + "'");
+    }
+    public Record getByRecordId(int recordId){
+        List<Record> recordList = getEntitiesList(GET_BY_RECORD_ID + "'" + recordId + "'");
+        if(recordList.isEmpty()){
+            return null;
+        } else {
+            return recordList.get(0);
+        }
     }
 }

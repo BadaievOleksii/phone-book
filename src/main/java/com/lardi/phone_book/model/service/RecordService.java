@@ -6,7 +6,9 @@ import com.lardi.phone_book.model.entity.Record;
 import java.util.List;
 
 public interface RecordService {
-    public List<Record> getAll();
+    public void delete(Record record);
+    public List<Record> getList();
     public List<Record> getByOwnerId(int ownerId);
+    public Record getByRecordId(int recordId);
 
 }

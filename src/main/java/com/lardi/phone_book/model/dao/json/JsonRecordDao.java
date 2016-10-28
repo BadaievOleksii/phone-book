@@ -37,4 +37,14 @@ public class JsonRecordDao extends JsonBaseDao<Record> implements RecordDao {
 
         return ownerRecords;
     }
+
+    public Record getByRecordId(int recordId) {
+        List<Record> records = getEntitiesList();
+        for(Record record : records){
+            if(record.getRecordId() == recordId){
+                return record;
+            }
+        }
+        return null;
+    }
 }

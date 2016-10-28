@@ -14,7 +14,7 @@
 
     <title>Phone book records</title>
 
-    <link href="${contextPath}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${contextPath}/resources/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 
 
 
@@ -22,19 +22,51 @@
 <body>
 <div class="container">
 
-    <c:if test="${not empty records}">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Surname</th>
+            <th>Name</th>
+            <th>Patronymic</th>
+            <th>Mobile phone number</th>
+            <th>Home phone number</th>
+            <th>Address</th>
+            <th>E-mail</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:if test="${not empty records}">
 
-        <ul>
             <c:forEach var="record" items="${records}">
-                <li>${record}</li>
-            </c:forEach>
-        </ul>
+                <tr>
+                    <td>${record.surname}</td>
+                    <td>${record.name}</td>
+                    <td>${record.patronymic}</td>
+                    <td>${record.mobilePhone}</td>
+                    <td>${record.homePhone}</td>
+                    <td>${record.address}</td>
+                    <td>${record.email}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-cog"></span></button>
+                            <button type="button" class="btn btn-primary btn-xs"
+                                    onclick="location.href='${contextPath}/deleterecord?id=${record.recordId}';">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </div>
+                    </td>
 
-    </c:if>
+                </tr>
+            </c:forEach>
+
+        </c:if>
+        </tbody>
+    </table>
+
 
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="${contextPath}/js/bootstrap.min.js"></script>
+<script src="${contextPath}/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </body>
 </html>

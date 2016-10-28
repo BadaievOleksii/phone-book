@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface RecordDao extends GenericDao<Record> {
     public List<Record> getByOwnerId(int ownerId);
+    public Record getByRecordId(int recordId);
 }

@@ -14,11 +14,21 @@ public class RecordServiceImpl implements RecordService {
     @Autowired
     RecordDao recordDao;
 
-    public List<Record> getAll(){
+
+    public void delete(Record record){
+        recordDao.delete(record);
+    }
+
+    public List<Record> getList(){
         return recordDao.getList();
     }
 
     public List<Record> getByOwnerId(int ownerId){
         return recordDao.getByOwnerId(ownerId);
+    }
+
+    public Record getByRecordId(int recordId){
+        return recordDao.getByRecordId(recordId);
+
     }
 }

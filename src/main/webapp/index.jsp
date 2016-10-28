@@ -14,7 +14,7 @@
 
     <title>Home page</title>
 
-    <link href="${contextPath}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${contextPath}/resources/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 
 
 
@@ -36,6 +36,6 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="${contextPath}/js/bootstrap.min.js"></script>
+<script src="${contextPath}/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </body>
 </html>

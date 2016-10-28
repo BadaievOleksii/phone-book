@@ -1,5 +1,6 @@
 package com.lardi.phone_book.model.dao.mysql;
 
+import com.lardi.phone_book.model.entity.Record;
 import com.lardi.phone_book.model.entity.User;
 import com.lardi.phone_book.model.dao.UserDao;
 import org.apache.logging.log4j.LogManager;
@@ -49,7 +50,7 @@ public class MysqlUserDao extends MysqlBaseDao<User> implements UserDao{
     }
 
 
-    public User findByUsername(String username){
+    public User getByUsername(String username){
         List<User> users = getEntitiesList(FIND_BY_USERNAME + "'" + username + "'");
         if(users.isEmpty()){
             return null;

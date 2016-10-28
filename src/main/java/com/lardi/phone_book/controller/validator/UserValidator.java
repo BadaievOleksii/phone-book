@@ -40,7 +40,7 @@ public class UserValidator implements Validator {
         if (user.getUsername().length() < 3 || user.getUsername().length() > 32) {
             errors.rejectValue("username", "Size.userForm.username");
         }
-        if (userDao.findByUsername(user.getUsername()) != null) {
+        if (userDao.getByUsername(user.getUsername()) != null) {
             errors.rejectValue("username", "Duplicate.userForm.username");
         }
         if (!checkWithRegExp(user.getUsername(), USERNAME_REGEX)) {
