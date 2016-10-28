@@ -1,11 +1,13 @@
 package com.lardi.phone_book.model.entity;
 
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity {
+public class User extends BaseEntity{
     @Id
     @Column(name= "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +23,17 @@ public class User extends BaseEntity {
 
     @Column(name="fio")
     private String fio;
+
+    public User() {
+    }
+
+    public User(User user) {
+        this.userId = user.getUserId();
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.passwordConfirm = user.getPasswordConfirm();
+        this.fio = user.getFio();
+    }
 
 
     @Override

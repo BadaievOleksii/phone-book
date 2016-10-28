@@ -8,6 +8,7 @@ import com.lardi.phone_book.model.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,11 +23,18 @@ public class JsonRecordDao extends JsonBaseDao<Record> implements RecordDao {
 
     @Override
     public List<Record> getList() {
-
         return getEntitiesList();
-
-
-
     }
 
+    public List<Record> getByOwnerId(int ownerId){
+        List<Record> allRecords = getEntitiesList();
+        List<Record> ownerRecords = new ArrayList<>();
+        for(Record record : allRecords){
+            if(record.getOwnerId() == ownerId){
+                ownerRecords.add(record);
+            }
+        }
+
+        return ownerRecords;
+    }
 }

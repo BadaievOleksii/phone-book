@@ -17,4 +17,8 @@ public class RecordServiceImpl implements RecordService {
     public List<Record> getAll(){
         return recordDao.getList();
     }
+
+    public List<Record> getByOwnerId(int ownerId){
+        return recordDao.getByOwnerId(ownerId);
+    }
 }

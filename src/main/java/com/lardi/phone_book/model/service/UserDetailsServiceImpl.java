@@ -2,6 +2,7 @@ package com.lardi.phone_book.model.service;
 
 import com.lardi.phone_book.model.dao.UserDao;
 import com.lardi.phone_book.model.entity.User;
+import com.lardi.phone_book.model.entity.UserAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,6 +29,8 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
+
+        return new UserAuth(user);
+        //return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }
 }

@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface RecordService {
     public List<Record> getAll();
+    public List<Record> getByOwnerId(int ownerId);
+
 }

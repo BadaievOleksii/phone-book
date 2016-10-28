@@ -6,6 +6,9 @@ import com.lardi.phone_book.model.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +28,11 @@ public class ViewDataController {
 
     @RequestMapping(value = "/viewdata", method = RequestMethod.GET)
     public String register(Model model) {
-        model.addAttribute("records", recordService.getAll());
 
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        LOG.debug("Logged user id: " + user.getUserId());
+
+        model.addAttribute("records", recordService.getByOwnerId(user.getUserId()));
         return "viewdata";
     }
 }
