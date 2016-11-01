@@ -24,7 +24,6 @@ public class RecordsController {
 
     protected static final Logger LOG = LogManager.getLogger(AuthController.class);
 
-    //TODO: crud-operations for records (based on /addrecord, /deleterecord etc, checking for ownerId etc)
     //TODO: view records with searches
 
     @Autowired
@@ -43,6 +42,41 @@ public class RecordsController {
         model.addAttribute("records", recordService.getByOwnerId(user.getUserId()));
         return "viewdata";
     }
+
+
+
+
+    @RequestMapping(value = "/addrecord", method = RequestMethod.GET)
+    public String addRecord(Model model) {
+        Record record = new Record();
+        model.addAttribute("recordForm", record);
+
+        return "addrecord";
+
+    }
+    @RequestMapping(value = "/addrecord", method = RequestMethod.POST)
+    public String addRecord(@ModelAttribute("recordForm") Record record, BindingResult bindingResult, Model model) {
+
+        recordValidator.validate(record, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "addrecord";
+        }
+
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        record.setOwnerId(user.getUserId());
+
+        LOG.debug("Adding new record: " + record);
+
+        recordService.add(record);
+
+        return "redirect:/viewdata";
+
+    }
+
+
+
+
 
     @RequestMapping(value = "/updaterecord", method = RequestMethod.GET)
     public String updateRecord(@RequestParam(value = "id", required = true) Integer id, Model model) {
@@ -67,8 +101,6 @@ public class RecordsController {
     @RequestMapping(value = "/updaterecord", method = RequestMethod.POST)
     public String updateRecord(@ModelAttribute("recordForm") Record record, BindingResult bindingResult, Model model) {
 
-        LOG.debug("Record for updating: " + record);
-
 
         Record dbRecord = recordService.getByRecordId(record.getRecordId());
         if(dbRecord == null){
@@ -80,6 +112,8 @@ public class RecordsController {
         if (bindingResult.hasErrors()) {
             return "updaterecord";
         }
+
+        LOG.debug("Record for updating: " + record);
 
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -102,12 +136,15 @@ public class RecordsController {
     @RequestMapping(value = "/deleterecord", method = RequestMethod.GET)
     public String deleteRecord(@RequestParam(value = "id", required = true) Integer id) {
 
-        LOG.debug("Deleting record with id " + id);
 
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        //Record record = recordService.getByRecordId(Integer.parseInt(id));
         Record record = recordService.getByRecordId(id);
-        //for null record
+        if(record == null){
+            LOG.debug("No record with id " + id + " - nothing to delete");
+            return "redirect:/viewdata";
+        }
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        LOG.debug("Deleting record with id " + id);
         if(record.getOwnerId() == user.getUserId()){
             recordService.delete(record);
         } else {

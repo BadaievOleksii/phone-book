@@ -14,6 +14,10 @@ public class RecordServiceImpl implements RecordService {
     @Autowired
     RecordDao recordDao;
 
+    public void add(Record record){
+        recordDao.add(record);
+    }
+
     public void update(Record record){
         recordDao.update(record);
     }

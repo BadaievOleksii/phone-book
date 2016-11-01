@@ -65,6 +65,11 @@
         </c:if>
         </tbody>
     </table>
+    <button class="btn btn-lg btn-primary btn-block"
+            onclick="location.href='${contextPath}/addrecord';">
+        <span class="glyphicon glyphicon-plus"></span>
+        Add new record
+    </button>
 
 
 </div>

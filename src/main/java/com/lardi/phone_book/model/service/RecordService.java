@@ -6,6 +6,7 @@ import com.lardi.phone_book.model.entity.Record;
 import java.util.List;
 
 public interface RecordService {
+    public void add(Record record);
     public void update(Record record);
     public void delete(Record record);
     public List<Record> getList();

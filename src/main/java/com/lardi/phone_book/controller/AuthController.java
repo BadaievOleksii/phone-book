@@ -57,22 +57,6 @@ public class AuthController {
         LOG.debug("Registering user: " + userForm);
         userService.add(userForm);
 
-
-//Autologin
-/*
-        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-        UserDetails user = new org.springframework.security.core.userdetails.User(
-                userForm.getUsername(),
-                userForm.getPassword(),
-                authorities);
-
-        Authentication authentication = new UsernamePasswordAuthenticationToken(user, userForm.getPassword(), authorities);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-*/
-
-
-
         return "redirect:/";
     }
 

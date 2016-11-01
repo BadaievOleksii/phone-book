@@ -27,6 +27,6 @@ public abstract class BaseDao<T extends BaseEntity> implements GenericDao<T> {
 
     public List<T> getList(){
         LOG.error(this.getClass().getSimpleName() + ": getList is not supported for this DAO");
-        return new ArrayList<>();
+        return null;
     }
 }

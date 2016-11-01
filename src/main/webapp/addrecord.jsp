@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Update record</title>
+    <title>Add new record</title>
 
     <link href="${contextPath}/resources/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -39,7 +39,7 @@
 
     <div class="col-md-offset-2 col-md-8">
         <form:form method="POST" modelAttribute="recordForm" class="form-signin">
-            <h2 class="form-signin-heading">Updating record:</h2>
+            <h2 class="form-signin-heading">Add new record:</h2>
 
             <h4>Surname:</h4>
             <spring:bind path="surname">
@@ -98,12 +98,7 @@
             </spring:bind>
 
 
-
-
-            <spring:bind path="recordId">
-                    <form:input type="hidden" path="recordId"></form:input>
-            </spring:bind>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Update</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Add</button>
             <h4 class="text-center"><a href="${contextPath}/viewdata">Cancel</a></h4>
 
         </form:form>

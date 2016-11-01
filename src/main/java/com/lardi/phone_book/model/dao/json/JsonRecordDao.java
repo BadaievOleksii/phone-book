@@ -20,8 +20,12 @@ public class JsonRecordDao extends JsonBaseDao<Record> implements RecordDao {
         fileName = AppConfig.getJsonRecordsFile();
     }
 
+    public void add(Record record){
+        //TODO: generate proper ID for entity
+        addEntity(record);
+    }
 
-    @Override
+
     public List<Record> getList() {
         return getEntitiesList();
     }
