@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Update record</title>
+    <title><spring:message code="UpdaterecPage.title"/></title>
 
     <link href="${contextPath}/resources/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -23,25 +23,13 @@
 
 <body>
 
-
-<!--
-
-    private String surname;
-    private String name;
-    private String patronymic;
-    private String mobilePhone;
-    private String homePhone;
-    private String address;
-    private String email;
--->
-
 <div class="container">
 
     <div class="col-md-offset-2 col-md-8">
         <form:form method="POST" modelAttribute="recordForm" class="form-signin">
-            <h2 class="form-signin-heading">Updating record:</h2>
+            <h2 class="form-signin-heading"><spring:message code="UpdaterecPage.header"/></h2>
 
-            <h4>Surname:</h4>
+            <h4><spring:message code="UpdaterecPage.surname"/></h4>
             <spring:bind path="surname">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <form:input type="text" path="surname" class="form-control" autofocus="true"></form:input>
@@ -49,7 +37,7 @@
                 </div>
             </spring:bind>
 
-            <h4>Name:</h4>
+            <h4><spring:message code="UpdaterecPage.name"/></h4>
             <spring:bind path="name">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <form:input type="text" path="name" class="form-control"></form:input>
@@ -57,7 +45,7 @@
                 </div>
             </spring:bind>
 
-            <h4>Patronymic:</h4>
+            <h4><spring:message code="UpdaterecPage.patronymic"/></h4>
             <spring:bind path="patronymic">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <form:input type="text" path="patronymic" class="form-control"></form:input>
@@ -65,7 +53,7 @@
                 </div>
             </spring:bind>
 
-            <h4>Mobile phone number:</h4>
+            <h4><spring:message code="UpdaterecPage.mobilePhone"/></h4>
             <spring:bind path="mobilePhone">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <form:input type="text" path="mobilePhone" class="form-control"></form:input>
@@ -73,7 +61,7 @@
                 </div>
             </spring:bind>
 
-            <h4>Home phone number:</h4>
+            <h4><spring:message code="UpdaterecPage.homePhone"/></h4>
             <spring:bind path="homePhone">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <form:input type="text" path="homePhone" class="form-control"></form:input>
@@ -81,7 +69,7 @@
                 </div>
             </spring:bind>
 
-            <h4>Address:</h4>
+            <h4><spring:message code="UpdaterecPage.address"/></h4>
             <spring:bind path="address">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <form:input type="text" path="address" class="form-control"></form:input>
@@ -89,7 +77,7 @@
                 </div>
             </spring:bind>
 
-            <h4>E-mail:</h4>
+            <h4><spring:message code="UpdaterecPage.email"/></h4>
             <spring:bind path="email">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <form:input type="text" path="email" class="form-control"></form:input>
@@ -103,8 +91,12 @@
             <spring:bind path="recordId">
                     <form:input type="hidden" path="recordId"></form:input>
             </spring:bind>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Update</button>
-            <h4 class="text-center"><a href="${contextPath}/viewdata">Cancel</a></h4>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">
+                <spring:message code="UpdaterecPage.updateButton"/>
+            </button>
+            <h4 class="text-center"><a href="${contextPath}/viewdata">
+                <spring:message code="UpdaterecPage.cancelButton"/>
+            </a></h4>
 
         </form:form>
 

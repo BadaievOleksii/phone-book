@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Create an account</title>
+    <title><spring:message code="RegPage.title"/></title>
 
     <link href="${contextPath}/resources/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -27,8 +27,10 @@
 
     <div class="col-md-offset-3 col-md-6">
         <form:form method="POST" modelAttribute="userForm" class="form-signin">
-            <h2 class="form-signin-heading">Create your account</h2>
-            <h4>Username:</h4>
+            <h2 class="form-signin-heading">
+                <spring:message code="RegPage.header"/>
+            </h2>
+            <h4><spring:message code="RegPage.username"/></h4>
             <spring:bind path="username">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <form:input type="text" path="username" class="form-control"
@@ -37,7 +39,7 @@
                 </div>
             </spring:bind>
 
-            <h4>Password:</h4>
+            <h4><spring:message code="RegPage.pass"/></h4>
             <spring:bind path="password">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <form:input type="password" path="password" class="form-control"></form:input>
@@ -45,7 +47,7 @@
                 </div>
             </spring:bind>
 
-            <h4>Confirm password:</h4>
+            <h4><spring:message code="RegPage.pass2"/></h4>
             <spring:bind path="passwordConfirm">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <form:input type="password" path="passwordConfirm" class="form-control"></form:input>
@@ -53,15 +55,19 @@
                 </div>
             </spring:bind>
 
-            <h4>Full name:</h4>
+            <h4><spring:message code="RegPage.fio"/></h4>
             <spring:bind path="fio">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <form:input type="text" path="fio" class="form-control"></form:input>
                     <form:errors path="fio"></form:errors>
                 </div>
             </spring:bind>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-            <h4 class="text-center"><a href="${contextPath}/login">Log in</a></h4>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">
+                <spring:message code="RegPage.regButton"/>
+            </button>
+            <h4 class="text-center"><a href="${contextPath}/login"
+                <spring:message code="RegPage.loginLink"/>
+            </a></h4>
 
         </form:form>
 

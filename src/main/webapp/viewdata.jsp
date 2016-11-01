@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Phone book records</title>
+    <title><spring:message code="ViewdataPage.title"/></title>
 
     <link href="${contextPath}/resources/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -21,7 +21,9 @@
 </head>
 <body>
 <div class="container">
-    <h2 class="center-block">Your phone book</h2>
+    <h2>
+        <spring:message code="ViewdataPage.header"/>
+    </h2>
 
 
 
@@ -30,13 +32,13 @@
     <table class="table">
         <thead>
         <tr>
-            <th>Surname</th>
-            <th>Name</th>
-            <th>Patronymic</th>
-            <th>Mobile phone number</th>
-            <th>Home phone number</th>
-            <th>Address</th>
-            <th>E-mail</th>
+            <th><spring:message code="ViewdataPage.surname"/></th>
+            <th><spring:message code="ViewdataPage.name"/></th>
+            <th><spring:message code="ViewdataPage.patronymic"/></th>
+            <th><spring:message code="ViewdataPage.mobilePhone"/></th>
+            <th><spring:message code="ViewdataPage.homePhone"/></th>
+            <th><spring:message code="ViewdataPage.address"/></th>
+            <th><spring:message code="ViewdataPage.email"/></th>
         </tr>
         </thead>
         <tbody>
@@ -70,23 +72,28 @@
         </c:if>
         </tbody>
     </table>
-    </br>
     <hr>
     </br>
     <button class="btn btn-lg btn-primary btn-block"
             onclick="location.href='${contextPath}/addrecord';">
         <span class="glyphicon glyphicon-plus"></span>
-        Add new record
+        <spring:message code="ViewdataPage.addButton"/>
     </button>
+
+    </br>
+    </br>
 
     <div>
         <h4>
-            Filter by:
+            <spring:message code="ViewdataPage.filterHeader"/>
         </h4>
         <form>
-            Surname: <input type="text" id="surnameField" class="form-control" value="${param.surname}">
-            Name: <input type="text" id="nameField" class="form-control" value="${param.name}">
-            Mobile phone: <input type="text" id="mobileField" class="form-control" value="${param.mobile}">
+            <spring:message code="ViewdataPage.filterSurname"/>
+            <input type="text" id="surnameField" class="form-control" value="${param.surname}">
+            <spring:message code="ViewdataPage.filterName"/>
+            <input type="text" id="nameField" class="form-control" value="${param.name}">
+            <spring:message code="ViewdataPage.filterMobile"/>
+            <input type="text" id="mobileField" class="form-control" value="${param.mobile}">
         </form>
 
         </br>
@@ -95,12 +102,12 @@
         <button type="button" class="btn btn-primary btn-lg"
                 onclick="filter('surnameField', 'nameField', 'mobileField')">
             <span class="glyphicon glyphicon-search"></span>
-            Filter
+            <spring:message code="ViewdataPage.filterButton"/>
         </button>
         <button type="button" class="btn btn-primary btn-lg"
                 onclick="location.href='?'">
             <span class="glyphicon glyphicon-align-justify"></span>
-            Clear filter
+            <spring:message code="ViewdataPage.filterClear"/>
         </button>
     </div>
 

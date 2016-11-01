@@ -17,7 +17,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
 
-        Locale.setDefault(Locale.ENGLISH);
+        //Locale.setDefault(Locale.ENGLISH);
         //LOG.debug(Locale.getDefault().toString());
 
         SpringApplication.run(Application.class, args);
