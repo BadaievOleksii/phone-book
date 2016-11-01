@@ -2,6 +2,7 @@ package com.lardi.phone_book.model.dao.json;
 
 import com.google.gson.Gson;
 import com.lardi.phone_book.config.AppConfig;
+import com.lardi.phone_book.model.entity.Record;
 import com.lardi.phone_book.model.entity.User;
 import com.lardi.phone_book.model.dao.UserDao;
 import org.apache.logging.log4j.LogManager;
@@ -19,9 +20,15 @@ public class JsonUserDao extends JsonBaseDao<User> implements UserDao {
     }
 
 
-    //TODO: proper user_id for new lines
     @Override
     public void add(User newUser){
+        User lastUser = getLastEntity();
+        int id = 1;
+        if(lastUser != null) {
+            id = lastUser.getUserId() + 1;
+        }
+        newUser.setUserId(id);
+
         addEntity(newUser);
     }
 

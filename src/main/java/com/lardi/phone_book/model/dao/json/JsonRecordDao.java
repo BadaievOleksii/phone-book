@@ -2,12 +2,23 @@ package com.lardi.phone_book.model.dao.json;
 
 import com.lardi.phone_book.config.AppConfig;
 import com.lardi.phone_book.model.dao.RecordDao;
-import com.lardi.phone_book.model.dao.mysql.MysqlBaseDao;
 import com.lardi.phone_book.model.entity.Record;
-import com.lardi.phone_book.model.entity.User;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.LineIterator;
+import org.apache.commons.io.input.ReversedLinesFileReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.core.GenericTypeResolver;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +32,52 @@ public class JsonRecordDao extends JsonBaseDao<Record> implements RecordDao {
     }
 
     public void add(Record record){
-        //TODO: generate proper ID for entity
+        int id = 1;
+        Record lastRecord = getLastEntity();
+        if(lastRecord != null) {
+            id = lastRecord.getRecordId() + 1;
+        }
+        record.setRecordId(id);
+
+
         addEntity(record);
     }
+    public void update(Record record){
+        File file = new File(fileName);
 
+        try {
+            List<String> lines = FileUtils.readLines(file);
+            for(int i = 0; i < lines.size(); i++){
+                Record fileRecord = gson.fromJson(lines.get(i), Record.class);
+                if(fileRecord.getRecordId() == record.getRecordId()){
+                    lines.set(i, gson.toJson(record, Record.class));
+                    break;
+                }
+            }
+
+            FileUtils.writeLines(file, lines);
+        } catch (IOException e) {
+            LOG.error("Could not update entity in JSON file", e);
+        }
+    }
+    public void delete(Record record){
+        File file = new File(fileName);
+
+        try {
+            List<String> lines = FileUtils.readLines(file);
+            for(int i = 0; i < lines.size(); i++){
+                Record fileRecord = gson.fromJson(lines.get(i), Record.class);
+                if(fileRecord.getRecordId() == record.getRecordId()){
+                    lines.remove(i);
+                    break;
+                }
+            }
+
+            FileUtils.writeLines(file, lines);
+        } catch (IOException e) {
+            LOG.error("Could not delete entity in JSON file", e);
+        }
+    }
 
     public List<Record> getList() {
         return getEntitiesList();

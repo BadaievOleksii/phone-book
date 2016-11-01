@@ -6,8 +6,10 @@ import com.lardi.phone_book.config.AppConfig;
 import com.lardi.phone_book.model.dao.BaseDao;
 import com.lardi.phone_book.model.dao.GenericDao;
 import com.lardi.phone_book.model.entity.BaseEntity;
+import com.lardi.phone_book.model.entity.Record;
 import com.lardi.phone_book.model.entity.User;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.input.ReversedLinesFileReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.core.GenericTypeResolver;
@@ -35,6 +37,21 @@ public abstract class JsonBaseDao<T extends BaseEntity> extends BaseDao<T> imple
         } catch (IOException e) {
             LOG.error("Could not write new entity to JSON file", e);
         }
+    }
+
+    protected T getLastEntity(){
+        T lastEntity = null;
+        try {
+            File file = new File(fileName);
+            ReversedLinesFileReader fileReader = new ReversedLinesFileReader(file);
+            String lastLine = fileReader.readLine();
+            Class<T> entityType = (Class<T>) GenericTypeResolver.resolveTypeArgument(getClass(), JsonBaseDao.class);
+            lastEntity = gson.fromJson(lastLine, entityType);
+            fileReader.close();
+        } catch (IOException e) {
+            LOG.error("Cannot read last entity from JSON file", e);
+        }
+        return lastEntity;
     }
 
     protected List<T> getEntitiesList() {

@@ -1,7 +1,9 @@
 package com.lardi.phone_book.controller;
 
 import com.lardi.phone_book.controller.validator.UserValidator;
+import com.lardi.phone_book.model.dao.RecordDao;
 import com.lardi.phone_book.model.dao.UserDao;
+import com.lardi.phone_book.model.entity.Record;
 import com.lardi.phone_book.model.entity.User;
 import com.lardi.phone_book.model.service.UserService;
 import org.apache.logging.log4j.LogManager;
@@ -38,7 +40,6 @@ public class AuthController {
     private UserValidator userValidator;
 
 
-
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register(Model model) {
         model.addAttribute("userForm", new User());
@@ -62,9 +63,7 @@ public class AuthController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
-
-
-        return "login";
+                return "login";
     }
 
 }
