@@ -14,6 +14,9 @@ public class RecordServiceImpl implements RecordService {
     @Autowired
     RecordDao recordDao;
 
+    public void update(Record record){
+        recordDao.update(record);
+    }
 
     public void delete(Record record){
         recordDao.delete(record);

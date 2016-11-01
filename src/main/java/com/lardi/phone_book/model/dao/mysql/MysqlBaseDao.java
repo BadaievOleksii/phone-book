@@ -35,6 +35,20 @@ public abstract class MysqlBaseDao<T extends BaseEntity> extends BaseDao<T> impl
 
     }
 
+    protected void updateEntity(T entity){
+        Transaction tx = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
+            session.update(entity);
+            tx.commit();
+            LOG.debug("Updated " + entity.toString() + " in MySQL db");
+        } catch (Exception e) {
+            LOG.error("Could not UPDATE entity in MySQL db", e);
+        }
+
+    }
+
+
     protected void deleteEntity(T entity){
         Transaction tx = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {

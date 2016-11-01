@@ -1,5 +1,6 @@
 package com.lardi.phone_book.controller;
 
+import com.lardi.phone_book.controller.validator.RecordValidator;
 import com.lardi.phone_book.model.entity.Record;
 import com.lardi.phone_book.model.entity.User;
 import com.lardi.phone_book.model.service.RecordService;
@@ -12,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +30,9 @@ public class RecordsController {
     @Autowired
     private RecordService recordService;
 
+    @Autowired
+    private RecordValidator recordValidator;
+
 
     @RequestMapping(value = "/viewdata", method = RequestMethod.GET)
     public String viewData(Model model) {
@@ -38,15 +44,70 @@ public class RecordsController {
         return "viewdata";
     }
 
+    @RequestMapping(value = "/updaterecord", method = RequestMethod.GET)
+    public String updateRecord(@RequestParam(value = "id", required = true) Integer id, Model model) {
+
+        Record record = recordService.getByRecordId(id);
+        if(record == null){
+            LOG.debug("Cannot update - there is no record with such id in DB: " + id);
+            return "redirect:/viewdata";
+        }
+
+        LOG.debug("Record before jsp page: " + record);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(record.getOwnerId() == user.getUserId()){
+            model.addAttribute("recordForm", record);
+            return "updaterecord";
+        } else {
+            LOG.warn("User " + user.getUsername() + " is trying to update another user's record");
+            return "redirect:/viewdata";
+        }
+
+    }
+    @RequestMapping(value = "/updaterecord", method = RequestMethod.POST)
+    public String updateRecord(@ModelAttribute("recordForm") Record record, BindingResult bindingResult, Model model) {
+
+        LOG.debug("Record for updating: " + record);
+
+
+        Record dbRecord = recordService.getByRecordId(record.getRecordId());
+        if(dbRecord == null){
+            LOG.debug("Cannot update - there is no record with such id in DB: " + record.getRecordId());
+            return "redirect:/viewdata";
+        }
+
+        recordValidator.validate(record, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "updaterecord";
+        }
+
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (dbRecord.getOwnerId() == user.getUserId()) {
+            record.setOwnerId(dbRecord.getOwnerId());
+            recordService.update(record);
+        } else {
+            LOG.warn("User " + user.getUsername() + " is trying to update another user's record");
+        }
+        return "redirect:/viewdata";
+
+    }
+
+
+
+
+
 
     @RequestMapping(value = "/deleterecord", method = RequestMethod.GET)
-    public String deleteRecord(@RequestParam("id") int id) {
+    public String deleteRecord(@RequestParam(value = "id", required = true) Integer id) {
 
         LOG.debug("Deleting record with id " + id);
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         //Record record = recordService.getByRecordId(Integer.parseInt(id));
         Record record = recordService.getByRecordId(id);
+        //for null record
         if(record.getOwnerId() == user.getUserId()){
             recordService.delete(record);
         } else {

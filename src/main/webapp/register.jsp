@@ -28,33 +28,35 @@
     <div class="col-md-offset-3 col-md-6">
         <form:form method="POST" modelAttribute="userForm" class="form-signin">
             <h2 class="form-signin-heading">Create your account</h2>
+            <h4>Username:</h4>
             <spring:bind path="username">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
-                    <form:input type="text" path="username" class="form-control" placeholder="Username"
+                    <form:input type="text" path="username" class="form-control"
                                 autofocus="true"></form:input>
                     <form:errors path="username"></form:errors>
                 </div>
             </spring:bind>
 
+            <h4>Password:</h4>
             <spring:bind path="password">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
-                    <form:input type="password" path="password" class="form-control" placeholder="Password"></form:input>
+                    <form:input type="password" path="password" class="form-control"></form:input>
                     <form:errors path="password"></form:errors>
                 </div>
             </spring:bind>
 
+            <h4>Confirm password:</h4>
             <spring:bind path="passwordConfirm">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
-                    <form:input type="password" path="passwordConfirm" class="form-control"
-                                placeholder="Confirm your password"></form:input>
+                    <form:input type="password" path="passwordConfirm" class="form-control"></form:input>
                     <form:errors path="passwordConfirm"></form:errors>
                 </div>
             </spring:bind>
 
+            <h4>Full name:</h4>
             <spring:bind path="fio">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
-                    <form:input type="text" path="fio" class="form-control"
-                                placeholder="Full name"></form:input>
+                    <form:input type="text" path="fio" class="form-control"></form:input>
                     <form:errors path="fio"></form:errors>
                 </div>
             </spring:bind>

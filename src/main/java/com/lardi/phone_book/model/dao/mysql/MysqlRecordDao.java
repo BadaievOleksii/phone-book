@@ -18,6 +18,9 @@ public class MysqlRecordDao extends MysqlBaseDao<Record> implements RecordDao {
     private static final String GET_BY_OWNER_ID = "FROM Record WHERE ownerId=";
     private static final String GET_BY_RECORD_ID = "FROM Record WHERE recordId=";
 
+    public void update(Record record){
+        updateEntity(record);
+    }
 
     public void delete(Record record){
         deleteEntity(record);

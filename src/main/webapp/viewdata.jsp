@@ -48,7 +48,10 @@
                     <td>${record.email}</td>
                     <td>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-cog"></span></button>
+                            <button type="button" class="btn btn-primary btn-xs"
+                                    onclick="location.href='${contextPath}/updaterecord?id=${record.recordId}';">
+                                <span class="glyphicon glyphicon-cog"></span>
+                            </button>
                             <button type="button" class="btn btn-primary btn-xs"
                                     onclick="location.href='${contextPath}/deleterecord?id=${record.recordId}';">
                                 <span class="glyphicon glyphicon-remove"></span>

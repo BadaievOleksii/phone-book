@@ -31,7 +31,8 @@ public class Record extends BaseEntity{
     @Override
     public String toString() {
         return "Record{" +
-                "surname='" + surname + '\'' +
+                "id=" + recordId +
+                ", surname='" + surname + '\'' +
                 ", mobilePhone='" + mobilePhone + '\'' +
                 ", ownerId=" + ownerId +
                 '}';
