@@ -21,6 +21,11 @@
 </head>
 <body>
 <div class="container">
+    <h2 class="center-block">Your phone book</h2>
+
+
+
+
 
     <table class="table">
         <thead>
@@ -65,15 +70,51 @@
         </c:if>
         </tbody>
     </table>
+    </br>
+    <hr>
+    </br>
     <button class="btn btn-lg btn-primary btn-block"
             onclick="location.href='${contextPath}/addrecord';">
         <span class="glyphicon glyphicon-plus"></span>
         Add new record
     </button>
 
+    <div>
+        <h4>
+            Filter by:
+        </h4>
+        <form>
+            Surname: <input type="text" id="surnameField" class="form-control" value="${param.surname}">
+            Name: <input type="text" id="nameField" class="form-control" value="${param.name}">
+            Mobile phone: <input type="text" id="mobileField" class="form-control" value="${param.mobile}">
+        </form>
+
+        </br>
+        </br>
+
+        <button type="button" class="btn btn-primary btn-lg"
+                onclick="filter('surnameField', 'nameField', 'mobileField')">
+            <span class="glyphicon glyphicon-search"></span>
+            Filter
+        </button>
+        <button type="button" class="btn btn-primary btn-lg"
+                onclick="location.href='?'">
+            <span class="glyphicon glyphicon-align-justify"></span>
+            Clear filter
+        </button>
+    </div>
+
 
 </div>
+<script>
+    function filter(surnameField, nameField, mobileField){
+        surname = document.getElementById(surnameField).value;
+        name = document.getElementById(nameField).value;
+        mobile = document.getElementById(mobileField).value;
+        window.location.href = '?surname='+surname+'&name='+name+'&mobile='+mobile;
+    }
 
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </body>

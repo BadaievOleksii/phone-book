@@ -59,19 +59,19 @@ public class RecordValidator implements Validator {
         if (!checkWithRegExp(record.getMobilePhone(), MOBILEPHONE_REGEX)) {
             errors.rejectValue("mobilePhone", "Symbols.recordForm.mobilePhone");
         }
-        if(record.getHomePhone() !=  null) {
+        if(!record.getHomePhone().isEmpty()) {
             if (!checkWithRegExp(record.getHomePhone(), HOMEPHONE_REGEX)) {
                 errors.rejectValue("homePhone", "Symbols.recordForm.homePhone");
             }
         }
 
-        if(record.getEmail() != null) {
+        if(!record.getEmail().isEmpty()) {
             if (!checkWithRegExp(record.getEmail(), EMAIL_REGEX)) {
                 errors.rejectValue("email", "Symbols.recordForm.email");
             }
         }
 
-        if(record.getAddress() != null){
+        if(!record.getAddress().isEmpty()){
             if (record.getAddress().length() > 45) {
                 errors.rejectValue("address", "Size.recordForm.address");
             }

@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class RecordsController {
 
@@ -34,12 +37,43 @@ public class RecordsController {
 
 
     @RequestMapping(value = "/viewdata", method = RequestMethod.GET)
-    public String viewData(Model model) {
+    public String viewData(@RequestParam(value = "surname", required = false) String surnameParam,
+                           @RequestParam(value = "name", required = false) String nameParam,
+                           @RequestParam(value = "mobile", required = false) String mobileParam,
+                           Model model) {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         LOG.debug("Logged user id: " + user.getUserId());
 
-        model.addAttribute("records", recordService.getByOwnerId(user.getUserId()));
+
+
+        List<Record> dbRecordsList = recordService.getByOwnerId(user.getUserId());
+        List<Record> recordsList = new ArrayList<>();
+
+        if(surnameParam == null && nameParam == null && mobileParam == null){
+            //If no filter params - list all records
+            recordsList = dbRecordsList;
+        } else {
+            if (surnameParam == null) {
+                surnameParam = "";
+            }
+            if (nameParam == null) {
+                nameParam = "";
+            }
+            if (mobileParam == null) {
+                mobileParam = "";
+            }
+
+            for (Record record : dbRecordsList) {
+                if ((record.getSurname().contains(surnameParam) && !surnameParam.isEmpty()) ||
+                        (record.getName().contains(nameParam) && !nameParam.isEmpty()) ||
+                        (record.getMobilePhone().contains(mobileParam) && !mobileParam.isEmpty())) {
+                    recordsList.add(record);
+                }
+            }
+        }
+
+        model.addAttribute("records", recordsList);
         return "viewdata";
     }
 
