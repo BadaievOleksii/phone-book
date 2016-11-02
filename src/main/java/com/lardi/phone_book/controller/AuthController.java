@@ -63,7 +63,7 @@ public class AuthController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
-                return "login";
+        return "login";
     }
 
 }

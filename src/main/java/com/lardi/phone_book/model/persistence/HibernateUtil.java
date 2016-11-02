@@ -13,15 +13,19 @@ public class HibernateUtil {
 
     private static SessionFactory sessionFactory;
 
+    private static String mysqlUrl;
+    private static String mysqlUser;
+    private static String mysqlPassword;
+
 
     private static SessionFactory buildSessionFactory() {
         try {
 
             Configuration cfg = new Configuration();
             cfg.configure();
-            cfg.setProperty("hibernate.hikari.dataSource.url", AppConfig.getMysqlUrl());
-            cfg.setProperty("hibernate.hikari.dataSource.user", AppConfig.getMysqlUser());
-            cfg.setProperty("hibernate.hikari.dataSource.password", AppConfig.getMysqlPassword());
+            cfg.setProperty("hibernate.hikari.dataSource.url", mysqlUrl);
+            cfg.setProperty("hibernate.hikari.dataSource.user", mysqlUser);
+            cfg.setProperty("hibernate.hikari.dataSource.password", mysqlPassword);
             SessionFactory sessionFactory = cfg.buildSessionFactory();
             LOGGER.info("Initialized Hibernate: created SessionFactory");
             return sessionFactory;
@@ -48,4 +52,27 @@ public class HibernateUtil {
         LOGGER.info("Shutting down Hibernate: closing SessionFactory");
     }
 
+    public static String getMysqlUrl() {
+        return mysqlUrl;
+    }
+
+    public static void setMysqlUrl(String mysqlUrl) {
+        HibernateUtil.mysqlUrl = mysqlUrl;
+    }
+
+    public static String getMysqlUser() {
+        return mysqlUser;
+    }
+
+    public static void setMysqlUser(String mysqlUser) {
+        HibernateUtil.mysqlUser = mysqlUser;
+    }
+
+    public static String getMysqlPassword() {
+        return mysqlPassword;
+    }
+
+    public static void setMysqlPassword(String mysqlPassword) {
+        HibernateUtil.mysqlPassword = mysqlPassword;
+    }
 }

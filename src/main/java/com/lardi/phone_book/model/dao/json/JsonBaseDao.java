@@ -55,9 +55,7 @@ public abstract class JsonBaseDao<T extends BaseEntity> extends BaseDao<T> imple
     }
 
     protected List<T> getEntitiesList() {
-
         File f = new File(fileName);
-
 
         List<T> entities = new ArrayList<>();
         try {
@@ -73,8 +71,13 @@ public abstract class JsonBaseDao<T extends BaseEntity> extends BaseDao<T> imple
 
 
         return entities;
+    }
 
+    public String getFileName() {
+        return fileName;
+    }
 
-
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

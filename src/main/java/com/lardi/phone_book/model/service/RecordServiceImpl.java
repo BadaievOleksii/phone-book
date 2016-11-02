@@ -12,7 +12,7 @@ import java.util.List;
 public class RecordServiceImpl implements RecordService {
 
     @Autowired
-    RecordDao recordDao;
+    private RecordDao recordDao;
 
     public void add(Record record){
         recordDao.add(record);

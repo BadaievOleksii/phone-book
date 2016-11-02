@@ -19,10 +19,8 @@ public class UserServiceImpl implements UserService {
     protected static final Logger LOG = LogManager.getLogger(UserServiceImpl.class);
 
 
-    //@Autowired
-    //DaoFactory daoFactory;
     @Autowired
-    UserDao userDao;
+    private UserDao userDao;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;

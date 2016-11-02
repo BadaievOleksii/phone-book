@@ -6,6 +6,7 @@ import com.lardi.phone_book.model.dao.RecordDao;
 import com.lardi.phone_book.model.dao.UserDao;
 import com.lardi.phone_book.model.dao.json.JsonDaoFactory;
 import com.lardi.phone_book.model.dao.mysql.MysqlDaoFactory;
+import com.lardi.phone_book.model.persistence.HibernateUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,10 @@ public class AppConfig {
                 mysqlUrl = env.getRequiredProperty("lardi.mysql.url");
                 mysqlUser = env.getRequiredProperty("lardi.mysql.user");
                 mysqlPassword = env.getRequiredProperty("lardi.mysql.password");
+
+                HibernateUtil.setMysqlUrl(mysqlUrl);
+                HibernateUtil.setMysqlUser(mysqlUser);
+                HibernateUtil.setMysqlPassword(mysqlPassword);
 
                 return new MysqlDaoFactory();
             case "json":
