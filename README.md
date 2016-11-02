@@ -1,7 +1,7 @@
 'app.properties' file can be moved anywhere, while its path is specified as JVM parameter -Dlardi.conf (separate declaration
 for tests is in pom.xml plugins)
 
-Can be run from this folder with two commands:
+Can be run from this folder with two commands, e.g.:
 mvn package
 java -jar -Dlardi.conf="C:\\LardiData\\app.properties" target/phone-book-0.1-SNAPSHOT.jar
 
