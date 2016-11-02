@@ -29,3 +29,15 @@ CREATE TABLE `users` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+Used frameworks:
+Maven 3.3.9
+Spring Boot
+Spring Security
+Spring MVC
+Hibernate
+HikariCP
+Gson
+Log4j
+JUnit, Mockito
+Bootstrap
+
