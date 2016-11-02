@@ -1,8 +1,6 @@
 package com.lardi.phone_book.model.dao.json;
 
-import com.google.gson.Gson;
 import com.lardi.phone_book.config.AppConfig;
-import com.lardi.phone_book.model.entity.Record;
 import com.lardi.phone_book.model.entity.User;
 import com.lardi.phone_book.model.dao.UserDao;
 import org.apache.commons.io.FileUtils;

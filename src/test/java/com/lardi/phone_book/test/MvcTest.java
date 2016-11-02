@@ -1,10 +1,6 @@
 package com.lardi.phone_book.test;
 
-import com.lardi.phone_book.config.AppConfig;
-import com.lardi.phone_book.config.MvcConfig;
-import com.lardi.phone_book.config.WebSecurityConfig;
-import com.lardi.phone_book.model.dao.RecordDao;
-import com.lardi.phone_book.model.entity.Record;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
@@ -12,16 +8,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.context.support.WithUserDetails;
-import org.springframework.security.web.FilterChainProxy;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import org.springframework.test.context.web.AnnotationConfigWebContextLoader;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -31,14 +19,9 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import javax.jws.WebService;
-import java.sql.SQLException;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-//@DirtiesContext(classMode= DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-/*@ContextConfiguration(classes={AppConfig.class, MvcConfig.class},
-        loader=AnnotationConfigWebContextLoader.class)*/
 @SpringBootTest
 public class MvcTest {
 

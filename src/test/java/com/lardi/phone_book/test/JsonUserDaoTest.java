@@ -7,16 +7,13 @@ import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.jws.soap.SOAPBinding;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.mockito.BDDMockito.*;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

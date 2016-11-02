@@ -4,8 +4,6 @@ package com.lardi.phone_book.model.dao;
 import com.lardi.phone_book.model.entity.BaseEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
 import java.util.List;
 
 

@@ -2,7 +2,6 @@ package com.lardi.phone_book.model.service;
 
 
 import com.lardi.phone_book.model.entity.User;
-import com.lardi.phone_book.model.dao.DaoFactory;
 import com.lardi.phone_book.model.dao.UserDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

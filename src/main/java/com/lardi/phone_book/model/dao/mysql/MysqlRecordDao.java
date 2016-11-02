@@ -1,9 +1,7 @@
 package com.lardi.phone_book.model.dao.mysql;
 
 import com.lardi.phone_book.model.dao.RecordDao;
-import com.lardi.phone_book.model.dao.UserDao;
 import com.lardi.phone_book.model.entity.Record;
-import com.lardi.phone_book.model.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

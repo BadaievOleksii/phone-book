@@ -1,4 +1,5 @@
 package com.lardi.phone_book.controller.validator;
+
 import com.lardi.phone_book.model.dao.UserDao;
 import com.lardi.phone_book.model.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;

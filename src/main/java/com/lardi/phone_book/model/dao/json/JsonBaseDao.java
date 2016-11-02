@@ -2,16 +2,11 @@ package com.lardi.phone_book.model.dao.json;
 
 
 import com.google.gson.Gson;
-import com.lardi.phone_book.config.AppConfig;
 import com.lardi.phone_book.model.dao.BaseDao;
 import com.lardi.phone_book.model.dao.GenericDao;
 import com.lardi.phone_book.model.entity.BaseEntity;
-import com.lardi.phone_book.model.entity.Record;
-import com.lardi.phone_book.model.entity.User;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.input.ReversedLinesFileReader;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.core.GenericTypeResolver;
 
 import java.io.File;
@@ -20,8 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class JsonBaseDao<T extends BaseEntity> extends BaseDao<T> implements GenericDao<T>{
-
-    //protected static final Logger LOG = LogManager.getLogger(JsonBaseDao.class);
 
     protected String fileName = "";
 

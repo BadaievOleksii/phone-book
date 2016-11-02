@@ -1,26 +1,17 @@
 package com.lardi.phone_book.model.dao.mysql;
 
 
-import com.google.gson.Gson;
 import com.lardi.phone_book.model.dao.BaseDao;
 import com.lardi.phone_book.model.dao.GenericDao;
 import com.lardi.phone_book.model.entity.BaseEntity;
 import com.lardi.phone_book.model.persistence.HibernateUtil;
-import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.springframework.core.GenericTypeResolver;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class MysqlBaseDao<T extends BaseEntity> extends BaseDao<T> implements GenericDao<T>{
 
-    //protected static final Logger LOG = LogManager.getLogger(MysqlBaseDao.class);
 
     protected void addEntity(T entity){
         Transaction tx = null;

@@ -2,9 +2,7 @@ package com.lardi.phone_book.test;
 
 
 import com.lardi.phone_book.model.dao.RecordDao;
-import com.lardi.phone_book.model.dao.UserDao;
 import com.lardi.phone_book.model.entity.Record;
-import com.lardi.phone_book.model.entity.User;
 import com.lardi.phone_book.model.service.RecordService;
 import org.junit.Before;
 import org.junit.Test;
