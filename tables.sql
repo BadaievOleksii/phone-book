@@ -1,15 +1,3 @@
-'app.properties' file can be moved anywhere, while its path is specified as JVM parameter -Dlardi.conf (separate declaration
-for tests is in pom.xml plugins)
-
-Can be run from this folder with two commands, e.g.:
-
-mvn package
-
-java -jar -Dlardi.conf="C:\\LardiData\\app.properties" target/phone-book-0.1-SNAPSHOT.jar
-
-
-MySQL table creation commands:
-
 CREATE TABLE `phonebook_records` (
   `record_id` int(11) NOT NULL AUTO_INCREMENT,
   `owner_id` int(11) NOT NULL,
@@ -30,16 +18,3 @@ CREATE TABLE `users` (
   `fio` varchar(45) NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-Used frameworks:
-Maven 3.3.9
-Spring Boot
-Spring Security
-Spring MVC
-Hibernate
-HikariCP
-Gson
-Log4j
-JUnit, Mockito
-Bootstrap
-
